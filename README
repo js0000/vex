@@ -1,0 +1,43 @@
+# vex
+
+# vex is a way to generate arbitrary length realizations of erik satie's
+# _vexations_ as midi files
+
+
+PREREQUISITES
+=============
+
+web server that can run perl CGI scripts
+
+perl libraries
+---- ---------
+CGI
+Text::Template
+MIDI::Simple
+IO::File
+
+
+HOW TO SET UP
+=== == === ==
+
+use or create a directory on the webserver where perl scripts can run under
+CGI. it is well beyond my patience to try and explain this too you. RTFM.
+
+put script [.pl] and template [.html] in the same CGI directory [as above].
+
+navigate to script and enjoy.
+
+i put limits on how long a particular realization can be, but i would expect
+you can change them by editing vex.pl lines 50-57.
+
+
+A BIT ABOUT SATIE
+= === ===== =====
+
+vexations was pretty much unknown until cage rediscovered in the 1960s. satie
+appeals to me for many reasons, one of which is that he never took himself too
+seriously. another is that i think his music offers a gateway into deeper
+truths than sounds in time. but i fear that is it a matter that i will not be
+able to convince any to change their minds about, as it is almost wholly in the
+realm of the intangible things that influence our lives.
+

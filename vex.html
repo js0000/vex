@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  
+  <!-- 
+    Copyright 2005 john saylor
+
+    This file is part of vex.
+
+    vex is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    vex is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with vex.  If not, see <http://www.gnu.org/licenses/>.  
+  -->
+
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+    <title>web vex</title>
+    
+  <style type="text/css">
+    
+    body
+    {
+      background-color: silver;
+    }
+    
+    h1, h2, th
+    {
+      font-family: verdana, Helvetica, sans-serif;
+      color: maroon;
+    }
+    
+    h2 
+    {
+      margin-left: 1.5em;
+    }
+
+    p, table, ul
+    {
+      margin-left: 3em;
+      font-family: georgia, Times, serif;
+    }
+    
+    .error
+    {
+      font-weight: bold;
+      color: teal;
+    }
+    
+    .fieldName
+    {
+      font-weight: bold;
+      text-align: right;
+      vertical-align: top;
+    }
+  </style>
+ 
+  <script type="text/javascript">
+    function validateVex()
+    {
+      var re = /^\d{1,4}$/;
+      var rv = false;
+    
+      var repetitions = document.vexData.repetitions.value;
+
+      if ( ! ( re.test ( repetitions ) ) )
+      {
+        alert ( 'repetitions is not an integer: ' + repetitions );
+	document.vexData.reset ();
+      }
+      else if (
+                ( repetitions < 16 )
+		||
+		( repetitions > 9999 )
+              )
+      {
+        alert ( 'repetitions is out of range [16-9999]: ' + repetitions );
+	document.vexData.reset ();
+      }
+      else
+      {
+        rv = true;
+      }
+
+      return rv;
+    }
+  
+  </script>
+  
+  </head> 
+  
+  <body>
+
+  <h1>web vex</h1>
+
+  <p>this page is a web interface to my vexations MIDI generation script</p>
+
+  <h2>generate vexations</h2>
+
+  <p class="error">_START $msg END_</p>
+  
+  <form action="/~johns/cgi-bin/vex.pl" 
+	method="post" 
+        name="vexData" 
+	onSubmit="return validateVex();">
+    
+    <table cellpadding="5" cellspacing="5">
+      
+      <tr>
+        <th>name</th>
+	<th>value</th>
+      </tr>
+     
+      <tr>
+        <td class="fieldName"><a name="repetitions">repetitions</a></td>
+	<td><input name="repetitions" value="16" size="5" maxlength="4" /></td>
+      </tr>
+
+      <tr>
+        <td class="fieldName"><a name="output">output</a></td>
+	<td><input type="radio" name="output" value="browser" checked="true" /> browser<br />
+	    <input type="radio" name="output" value="file" /> file</td>
+      </tr>
+      
+      <tr>
+	<td><input type="submit"  /></td>
+	<td><input type="reset" /></td>
+      </tr>
+      
+    </table>
+    
+  </form>
+  
+  <p>this HTML form will return a realization of the erik satie's
+  <cite>vexations</cite> upon successful processing of the form's input.</p>
+  
+  <p>the <a href="#repetitions">repetitions</a> input box takes an integer that
+  corresponds to the number of times the theme is sounded. acceptable values
+  are between 16 and 9999 inclusive. i count the repetitions differently than
+  has been commonly done. for more on this, you can look at my <a
+  href="#yapc">YAPC presentation</a>.</p>
+  
+  <p>the <a href="#output">output</a> option is mostly about HTTP headers. the
+  <strong>browser</strong> radio button will return the output to the brower as
+  a MIDI file, and most browsers will just play the file. the
+  <strong>file</strong> radio button will the pass the file as an octet stream
+  with a suggested filename. most browsers will then ask you where to save the
+  file.</p> 
+
+  <h2>other resources</h2>
+
+  <ul>
+    <li><a name="yapc"><a href="/~johns/vex/">YAPC presentation</a></a></li>
+    <li><a href="http://en.wikipedia.org/wiki/Vexations">Vexations Wikipedia</a>
+       entry</li> 
+    <li><a href="http://www.af.lu.se/~fogwall/satie.html">Erik Satie</a>
+        homepage</li>
+  </ul>
+  
+  <hr>
+  
+  </body>
+</html>
